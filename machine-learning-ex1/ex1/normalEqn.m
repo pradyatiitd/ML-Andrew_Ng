@@ -12,6 +12,11 @@ theta = zeros(size(X, 2), 1);
 
 % ---------------------- Sample Solution ----------------------
 
+mat = (X'*X);
+mat2 = inv(mat);
+mat3 = mat2*X';
+mat4 = mat3*y;
+theta = mat4;
 
 
 

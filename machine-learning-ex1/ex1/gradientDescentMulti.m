@@ -18,14 +18,15 @@ for iter = 1:num_iters
     %
 
 
+theta_length = length(theta);
 
-
-
-
-
-
-
-
+for theta_idx=1:theta_length
+    fact = 0;
+    for i=1:m
+        fact+=((X(i,:)*theta - y(i))*X(i,theta_idx));    
+    end
+    theta(theta_idx)-=(alpha*fact/m);
+end
 
     % ============================================================
 

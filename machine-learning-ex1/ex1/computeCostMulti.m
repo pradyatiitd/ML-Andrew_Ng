@@ -8,13 +8,23 @@ m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
 J = 0;
+n = size(X,2);
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
 
+for i=1:m
+    cost = 0;
+    for j=1:n
+        cost+=(theta(j)*X(i,j));
+    end
+    cost-=y(i);
+    J+=(cost*cost);
+end
 
+J/=(2*m);
 
 
 % =========================================================================
