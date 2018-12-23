@@ -18,22 +18,22 @@ for iter = 1:num_iters
     %
 
 
-cost1 = 0
+cost1 = 0;
 for i=1:m
     cost1+=(theta(1) + (theta(2)*X(i,2)) - y(i));
 end
-cost1*=alpha
-cost1/=m
+cost1*=alpha;
+cost1/=m;
 
-cost_2 = 0
+cost_2 = 0;
 for j=1:m
     cost_2+=((theta(1) + (theta(2)*X(j,2)) - y(j))*X(j,2));
 end
-cost_2*=alpha
-cost_2/=m
+cost_2*=alpha;
+cost_2/=m;
 
-theta(1)-=cost1
-theta(2)-=cost_2
+theta(1)-=cost1;
+theta(2)-=cost_2;
 
 
 

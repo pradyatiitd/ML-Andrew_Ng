@@ -14,10 +14,10 @@ J = 0;
 %               You should set J to the cost.
 
 
-error_matrix = X*theta - y
+error_matrix = X*theta - y;
 
 for i=1:m
-    J+=(error_matrix(i)*error_matrix(i))
+    J+=(error_matrix(i)*error_matrix(i));
 end
 
 J/=(2*m);

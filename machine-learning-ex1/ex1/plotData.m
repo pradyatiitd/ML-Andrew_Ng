@@ -17,7 +17,7 @@ figure; % open a new figure window
 %       markers larger by using plot(..., 'rx', 'MarkerSize', 10);
 
 
-scatter(x,y,10,'r','x')
+scatter(x,y,10,'r','x');
 
 
 % ============================================================
