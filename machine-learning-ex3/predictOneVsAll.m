@@ -31,7 +31,19 @@ X = [ones(m, 1) X];
 %       
 
 
+matr = zeros(length(X),length(all_theta));
+k = length(all_theta);
+n = size(X,2);
+for i=1:m
+    for j=1:k
+        for idx=1:n
+            matr(i,j)+=(X(i,idx)*all_theta(j,idx));
+        end
+    end
+end
 
+matr2=sigmoid(matr);
+[m,p]=max(matr2,[],2);
 
 
 
