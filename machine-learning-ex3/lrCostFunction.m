@@ -36,28 +36,16 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
-
-prod = zeros(m,1);
-for j=1:m
-   prod(j) = X(j,:)*theta; 
-end
-
-prod2 = sigmoid(prod);
+prod2 = sigmoid(X*theta);
+prod3 = log(prod2);
+prod4 = log(1-prod2);
 
 for i=1:m
-    if y(i)==1
-        J+=(log(prod2(i)));
-    else
-        J+=(log(1-prod2(i)));
-    end
+   J+=(y(i)*prod3(i) + (1-y(i))*(prod4(i)));
 end
 J/=(-1*m);
 
-J2 = 0;
-theta_length = length(theta);
-for j=2:theta_length
-    J2+=(theta(j)*theta(j));
-end
+J2 = sum(theta.*theta) - theta(1)*theta(1);
 J2*=(lambda/(2*m));
 J+=J2;
 
