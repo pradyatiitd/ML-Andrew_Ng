@@ -39,6 +39,7 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 
+dummy_X = X;
 X = [ones(m,1) X];
 input_matrix = X*Theta1';
 input_matrix = sigmoid(input_matrix);
@@ -72,7 +73,29 @@ J/=m;
 %               over the training examples if you are implementing it for the 
 %               first time.
 
-
+for idx=1:m
+    da_1 = dummy_X(idx,:)';
+    % size(da_1) = 400 1
+    a_1 = [1;da_1];
+    z_2 = Theta1*a_1;
+    % size(z_2) = 25 1
+    da_2 = sigmoid(z_2);
+    a_2 = [1;da_2];
+    z_3 = Theta2*a_2;
+    % size(z_3) = 10 1
+    da_3 = sigmoid(z_3);
+    out_mat = zeros(num_labels,1);
+    out_mat(y(idx)) = 1;
+    del_3 = da_3 - out_mat;
+    del_2 = 0;
+    del_2 = (Theta2'*del_3);
+    del_2(1,:) = [];
+    del_2 = del_2.*sigmoidGradient(z_2);
+    grad1 = del_2 * a_1';
+    Theta1_grad += grad1;
+    grad2 = del_3*a_2';
+    Theta2_grad+=grad2;
+end
 
 % Part 3: Implement regularization with the cost function and gradients.
 %
