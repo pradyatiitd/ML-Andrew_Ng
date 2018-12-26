@@ -120,7 +120,28 @@ J+=sum1;
 % =========================================================================
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
+mat1 = zeros(size(Theta1));
+m1 = size(Theta1,1);
+m2 = size(Theta1,2);
+for i=1:m1
+    for j=2:m2
+        mat1(i,j) = lambda*Theta1(i,j);
+    end
+end
+
+mat2 = zeros(size(Theta2));
+m1 = size(Theta2,1);
+m2 = size(Theta2,2);
+for i=1:m1
+    for j=2:m2
+        mat2(i,j) = lambda*Theta2(i,j);
+    end
+end
+
+Theta1_grad+=mat1;
+Theta2_grad+=mat2;
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
+grad/=m;
 
 end
