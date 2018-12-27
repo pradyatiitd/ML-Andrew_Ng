@@ -19,13 +19,18 @@ idx = zeros(size(X,1), 1);
 %               range 1..K
 %
 % Note: You can use a for-loop over the examples to compute this.
-%
 
-
-
-
-
-
+for i=1:size(X,1)
+    d = 1000000;
+    for j=1:K
+        mat = X(i,:)-centroids(j,:);
+        cost = sum(mat.*mat);
+        if cost<d
+            d = cost;
+            idx(i) = j;
+        end
+    end
+end
 
 % =============================================================
 
