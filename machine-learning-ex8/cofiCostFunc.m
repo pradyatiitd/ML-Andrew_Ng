@@ -40,20 +40,52 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+prediction = X*Theta';
+prediction = prediction - Y;
+sqr = prediction.*prediction;
+mat1 = prediction.*R;
+
+for i=1:num_movies
+    for j=1:num_users
+        if R(i,j)==1
+            J+=sqr(i,j);
+        end
+    end
+end
 
 
+for k=1:num_features
+    for j=1:num_users
+        J+=(lambda*Theta(j,k)*Theta(j,k));
+    end
+end
 
+for k=1:num_features
+    for j=1:num_movies
+        J+=(lambda*X(j,k)*X(j,k));
+    end
+end
+J/=2;
 
+for i=1:num_movies
+    for k=1:num_features
+        fact = 0;
+        for j=1:num_users
+            fact+=(mat1(i,j)*Theta(j,k));
+        end
+        X_grad(i,k) = fact + lambda*X(i,k);
+    end
+end
 
-
-
-
-
-
-
-
-
-
+for j=1:num_users
+    for k=1:num_features
+        fact=0;
+        for i=1:num_movies
+            fact+=(mat1(i,j)*X(i,k));
+        end
+        Theta_grad(j,k) = fact + lambda*Theta(j,k);
+    end
+end
 
 % =============================================================
 
